@@ -1,0 +1,15 @@
+<%= form.fields_for :user do |u| %>
+    <div class="field">
+      <%= u.label :email %>
+      <div class="control">
+        <%= u.email_field :email, placeholder: 'exemplo@email.com' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= u.label :password %>
+      <div class="control">
+        <%= u.password_field :password %>
+      </div>
+    </div>
+<% end %>

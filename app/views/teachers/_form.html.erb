@@ -21,17 +21,7 @@
     <%= form.text_field :last_name %>
   </div>
 
-  <%= form.fields_for :user do |u| %>
-    <div class="field">
-      <%= u.label :email %>
-      <%= u.email_field :email, placeholder: 'exemplo@email.com' %>
-    </div>
-
-    <div class="field">
-      <%= u.label :password %>
-      <%= u.password_field :password %>
-    </div>
-  <% end %>
+  <%= render 'shared/user_form_fields', form: form %>
 
   <div class="actions">
     <%= form.submit 'Ok' %>
