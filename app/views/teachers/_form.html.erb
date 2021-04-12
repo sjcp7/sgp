@@ -12,18 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :first_name, 'Primeiro nome' %>
-    <%= form.text_field :first_name %>
+    <%= form.label :first_name, 'Primeiro nome', class: 'label' %>
+    <div class="control">
+      <%= form.text_field :first_name, class: 'input' %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :last_name, 'Último nome' %>
-    <%= form.text_field :last_name %>
+    <%= form.label :last_name, 'Último nome', class: 'label' %>
+    <div class="control">
+      <%= form.text_field :last_name, class: 'input' %>
+    </div>
   </div>
 
   <%= render 'shared/user_form_fields', form: form %>
 
   <div class="actions">
-    <%= form.submit 'Ok' %>
+    <%= form.submit 'Ok', class: 'button is-primary' %>
   </div>
 <% end %>
