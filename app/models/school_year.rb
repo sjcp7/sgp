@@ -1,3 +1,3 @@
 class SchoolYear < ApplicationRecord
-  attr_accessor :current
+  class_attribute :current
 end

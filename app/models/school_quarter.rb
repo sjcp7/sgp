@@ -1,3 +1,3 @@
 class SchoolQuarter < ApplicationRecord
-  attr_accessor :current
+  class_attribute :current
 end
