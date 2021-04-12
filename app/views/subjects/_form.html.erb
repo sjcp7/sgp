@@ -1,0 +1,17 @@
+<%= form_with model: subject, class: 'form' do |f| %>
+  <div class="field">
+    <%= f.label :description, 'Descrição', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :description, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :acronymn, 'Abreviação', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :acronymn, class: 'input' %>
+    </div>
+  </div>
+
+  <%= f.submit 'Ok', class: 'button is-primary' %>
+<% end %>
