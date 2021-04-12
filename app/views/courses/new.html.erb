@@ -1,0 +1,8 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Novo Curso</h1>
+    <%= render 'courses/form', 
+      course: @course, subjects: @subjects, 
+      kinds: @course_kinds, school_grades: @school_grades %>
+  </div>
+</section>
