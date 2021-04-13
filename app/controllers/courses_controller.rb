@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_instance_vars, only: %i[ new create edit update ]
   before_action :set_course, only: %i[ show edit update ]
   before_action :set_subjects, only: %i[ edit update ]
+  before_action :destroy_course_subjects, only: :update
 
   def index
     @courses = Course.all
@@ -30,11 +31,6 @@ class CoursesController < ApplicationController
   end
 
   def update
-    params[:course][:course_subjects_attributes].each do |attr_set|
-      if attr_set.last[:subject_id].blank?
-        attr_set.last[:_destroy] = '1'
-      end
-    end
     if @course.update(course_params)
       redirect_to @course, notice: 'Curso actualizado com sucesso.'
     else
@@ -63,5 +59,13 @@ class CoursesController < ApplicationController
       in_course: Subject.in_course(@course),
       not_in_course: Subject.not_in_course(@course)
     }
+  end
+
+  def destroy_course_subjects
+    params[:course][:course_subjects_attributes].each do |attr_set|
+      if attr_set.last[:subject_id].blank?
+        attr_set.last[:_destroy] = '1'
+      end
+    end
   end
 end
