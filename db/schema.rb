@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_122008) do
+ActiveRecord::Schema.define(version: 2021_04_13_205441) do
+
+  create_table "batches", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "school_year_id", null: false
+    t.integer "school_grade_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_batches_on_course_id"
+    t.index ["school_grade_id"], name: "index_batches_on_school_grade_id"
+    t.index ["school_year_id"], name: "index_batches_on_school_year_id"
+  end
 
   create_table "course_subjects", force: :cascade do |t|
     t.integer "course_id", null: false
