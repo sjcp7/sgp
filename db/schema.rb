@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_205441) do
+ActiveRecord::Schema.define(version: 2021_04_13_230940) do
 
   create_table "batches", force: :cascade do |t|
     t.integer "course_id", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_205441) do
     t.string "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "current", default: false
   end
 
   create_table "students", force: :cascade do |t|

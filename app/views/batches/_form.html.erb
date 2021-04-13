@@ -1,0 +1,23 @@
+<%= form_with model: batch, class: 'form' do |f| %>
+  <div class="field">
+    <%= f.label :course_id, 'Curso' %>
+    <div class="control">
+      <div class="select">
+        <%= f.select :course_id, courses %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :school_grade_id, 'Classe' %>
+    <div class="control">
+      <div class="select">
+        <%= f.select :school_grade_id, school_grades %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.hidden_field :school_year_id, value: school_year.id %>
+
+  <%= f.submit 'Ok', class: 'button is-primary' %>
+<% end %>
