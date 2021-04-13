@@ -1,0 +1,11 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Courses</h1>
+    <ul>
+      <% @courses.each do |course| %>
+        <li><%= course.acronymn %> | <%= link_to 'See', course_path(course) %> </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+    

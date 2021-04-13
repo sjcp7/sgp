@@ -1,0 +1,11 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= @course.description %> | <%= link_to 'Editar', edit_course_path(@course) %></h1>
+    <ul>
+      <% @course.course_subjects.each do |cs| %>
+        <li><%= cs.subject.description %> - <%= cs.school_grade.grade %></li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+    

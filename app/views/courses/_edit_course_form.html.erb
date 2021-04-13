@@ -1,0 +1,39 @@
+<%= form_with model: course, class: 'form' do |f| %>
+  <%= render 'courses/fields_for_course', f: f, kinds: kinds %>
+
+  <h2 class="subtitle">Adicionar disciplinas ao curso</h2>
+  <div class="columns">
+    <% school_grades.each do |school_grade| %>
+      <div class="panel column">
+        <p class="panel-heading"><%= school_grade.grade %> Classe</p>
+
+        <% subjects.dig(:in_course, school_grade.grade).each do |subject| %>
+          <%= f.fields_for :course_subjects do |cs| %>    
+            <% if cs.object.subject == subject && cs.object.school_grade == school_grade %>
+              <label class="panel-block">
+                <%= cs.check_box :subject_id, { checked: true }, subject.id, '' %>
+                <%= subject.description %>
+                <%= cs.hidden_field :school_grade_id, value: school_grade.id %>
+              </label>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% subjects.dig(:not_in_course, school_grade.grade).each do |subject| %>
+          <%= f.fields_for :course_subjects, course.course_subjects.build do |cs| %>            
+            <label class="panel-block">
+              <%= cs.check_box :subject_id, {}, subject.id %>
+              <%= subject.description %>
+              <%= cs.hidden_field :school_grade_id, value: school_grade.id %>
+            </label>
+          <% end %>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div> 
+
+  <div class="control">
+    <%= f.submit 'Ok', class: 'button is-primary' %>
+  </div>
+<% end %>
