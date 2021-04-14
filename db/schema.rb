@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_230940) do
+ActiveRecord::Schema.define(version: 2021_04_14_091754) do
 
   create_table "batches", force: :cascade do |t|
     t.integer "course_id", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_04_13_230940) do
     t.string "kind"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "batch_id", null: false
+    t.integer "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batch_id"], name: "index_enrollments_on_batch_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "school_grades", force: :cascade do |t|

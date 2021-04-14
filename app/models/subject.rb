@@ -1,6 +1,8 @@
 class Subject < ApplicationRecord
   has_many :course_subjects
   has_many :courses, through: :course_subjects
+  has_many :enrollments
+  has_many :batches, through: :enrollments
 
   def self.in_course(course)
     in_course = {}
