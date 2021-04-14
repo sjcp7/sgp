@@ -1,0 +1,33 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Turmas</h1>
+    <% if policy(Batch).create? %>
+      <%= link_to 'Criar', new_batch_path %>
+    <% end %>
+
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Curso</th>
+          <th>Ano Lectivo</th>
+          <th>Classe</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @batches.each do |batch| %>
+          <tr>
+            <td><%= batch.description %></td>
+            <td><%= batch.course.description %></td>
+            <td><%= batch.school_year.year %></td>
+            <td><%= batch.school_grade.grade %></td>
+            <td><%= link_to 'Abrir', batch_lectures_path(batch) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+

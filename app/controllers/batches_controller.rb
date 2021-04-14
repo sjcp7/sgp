@@ -1,9 +1,15 @@
 class BatchesController < ApplicationController
   before_action :set_instance_vars, only: %i[ new create ]
-  def new
-    @batch = Batch.new
+
+  def index
+    @batches = policy_scope(Batch)
   end
 
+  def new
+    @batch = Batch.new
+    authorize @batch
+  end
+  
   def create
     @batch = Batch.new(batch_params)
     if @batch.save
