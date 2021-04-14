@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'batches/index'
+    get 'batches/show'
+  end
   devise_for :users
   resources :batches, only: %i[ index show ]
   resources :lectures, only: %i[ show ] do
@@ -6,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   scope '/admin' do
-    resources :teachers, :students, :courses, :subjects
+    resources :teachers, :students, :courses, :subjects, :admins
   end
 
   namespace :admin do 
