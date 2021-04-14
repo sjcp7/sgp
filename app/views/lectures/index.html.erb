@@ -19,8 +19,8 @@
               <td><%= lecture.subject.description %></td>
               <td><%= sq.quarter %></td>
               <td>
-                <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC') %>
-                <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral') %>
+                <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC', school_quarter_id: sq.id) %>
+                <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral', school_quarter_id: sq.id) %>
               </td>
               <td>_</td>
               <td><%= link_to 'Adicionar', lecture_tests_path(

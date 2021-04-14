@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Avaliações Contínuas</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Curso</th>
+          <th>Disciplina</th>
+          <th>Turma</th>
+          <th>Trimestre</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th><%= @lecture.course.description %></th>
+          <th><%= @lecture.subject.description %></th>
+          <th><%= @lecture.batch.description %></th>
+          <th><%= @school_quarter.quarter %></th>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <% p "num: " + @num_of_ac.to_s %>
+          <% for num in 1..@num_of_ac %>
+            <th>AC<%= num %></th>
+          <% end %>
+          <th><abbr title="Média das Avaliações Contínuas">MAC</abbr></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <th><%= student.full_name %></th>
+            <% student.tests.AC.each do |test| %>
+              <th><%= test.score %></th>
+            <% end %>
+            <th><%= student.tests.MAC.find_by(school_quarter: @school_quarter).score %></th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
