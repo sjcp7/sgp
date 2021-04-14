@@ -43,11 +43,11 @@ course_subjects = CourseSubject.create(course_subject_list)
 
 Batch.destroy_all
 batch_list = [
-  { course: courses.first, school_year: school_years.first, school_grade: school_grades.first },
-  { course: courses.first, school_year: school_years.last, school_grade: school_grades.first },
-  { course: courses.first, school_year: school_years.last, school_grade: school_grades.second },
-  { course: courses.last, school_year: school_years.last, school_grade: school_grades.first },
-  { course: courses.last, school_year: school_years.last, school_grade: school_grades.second },
+  { description: 'INFO10', course: courses.first, school_year: school_years.first, school_grade: school_grades.first },
+  { description: 'INFO10', course: courses.first, school_year: school_years.last, school_grade: school_grades.first },
+  { description: 'INFO11', course: courses.first, school_year: school_years.last, school_grade: school_grades.second },
+  { description: 'CFB10', course: courses.last, school_year: school_years.last, school_grade: school_grades.first },
+  { description: 'CFB11', course: courses.last, school_year: school_years.last, school_grade: school_grades.second },
 ]
 batches = Batch.create(batch_list)
 
