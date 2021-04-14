@@ -96,10 +96,14 @@ teacher_list = [
 ]
 teachers = Teacher.create(teacher_list)
 
+Admin.destroy_all
+admin = Admin.create(first_name: 'admin', last_name: 'admin')
+
 User.destroy_all
 user_list = teachers.map do |teacher|
   { email: "#{teacher.first_name}.#{teacher.last_name}@email.com", password: 'password', profile: teacher }
 end
+user_list << { email: 'admin@email.com', password: 'password', profile: admin}
 users = User.create(user_list)
 
 Lecture.destroy_all
