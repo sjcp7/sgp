@@ -1,0 +1,36 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= @batch.description %></h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Disciplina</th>
+          <th>Trimestre</th>
+          <th>Pauta</th>
+          <th>Notas</th>
+          <th>Avaliação Contínua</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lectures.each do |lecture| %>
+          <% @school_quarters.each do |sq| %>
+            <tr>
+              <td><%= lecture.subject.description %></td>
+              <td><%= sq.quarter %></td>
+              <td>
+                <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC') %>
+                <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral') %>
+              </td>
+              <td>_</td>
+              <td><%= link_to 'Adicionar', lecture_tests_path(
+                  lecture, kind: 'AC', score: 0, school_quarter_id: sq.id, max_score: 5
+                ), method: :post %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>        
+      </tbody>
+    </table>
+  </div>
+</section>
