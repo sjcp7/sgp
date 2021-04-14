@@ -37,7 +37,7 @@ course_subject_list = [
   { course: courses.first, subject: subjects.last, school_grade: school_grades.first },
   { course: courses.first, subject: subjects.last, school_grade: school_grades.second},
   { course: courses.last, subject: subjects.first, school_grade: school_grades.first },
-  { course: courses.first, subject: subjects.first, school_grade: school_grades.second },
+  { course: courses.last, subject: subjects.first, school_grade: school_grades.second },
 ]
 course_subjects = CourseSubject.create(course_subject_list)
 
@@ -111,9 +111,9 @@ lecture_list = [
   { course_subject: course_subjects.first, batch: batches.first, teacher: teachers.last }, 
   { course_subject: course_subjects.second, batch: batches.first, teacher: teachers.first },
   { course_subject: course_subjects.first, batch: batches.second, teacher: teachers.last },
-  { course_subject: course_subjects.first, batch: batches.second, teacher: teachers.first },
-  { course_subject: course_subjects.last, batch: batches[2], teacher: teachers.first },
-  { course_subject: course_subjects.first, batch: batches[3], teacher: teachers.last },
+  { course_subject: course_subjects.second, batch: batches.second, teacher: teachers.first },
+  { course_subject: course_subjects.third, batch: batches.third, teacher: teachers.first },
+  { course_subject: course_subjects.fourth, batch: batches.fourth, teacher: teachers.last },
   { course_subject: course_subjects.first, batch: batches.last, teacher: teachers.last }
 ]
 lectures = Lecture.create(lecture_list)
