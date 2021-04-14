@@ -1,0 +1,8 @@
+<% if current_user.admin? %>
+  <%= link_to 'Cursos', '#', class: 'navbar-item' %>
+  <%= link_to 'Disciplinas', '#', class: 'navbar-item' %>
+  <%= link_to 'Estudantes', '#', class: 'navbar-item' %>
+  <%= link_to 'Turmas', '#', class: 'navbar-item' %>
+<% elsif current_user.teacher? %>
+  <%= link_to 'Minhas Turmas', '#', class: 'navbar-item' %>
+<% end %>
