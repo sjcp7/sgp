@@ -5,6 +5,7 @@ class Lecture < ApplicationRecord
   has_one :school_year, through: :batch
   has_many :students, through: :batch
   has_one :school_grade, through: :course_subject
+  has_one :subject, through: :course_subject
   has_many :tests
 
   after_create :create_tests
