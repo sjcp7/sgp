@@ -7,4 +7,11 @@ class Batch < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :lectures
   has_many :tests, through: :lectures
+  has_many :teachers, through: :lectures
+
+  def self.fetch_with_teacher(teacher)
+    Batch.all.filter do |b|
+      b.lectures.where(teacher: teacher).exists?
+    end    
+  end
 end
