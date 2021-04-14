@@ -5,4 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :profile, polymorphic: true
+
+  def admin?
+    profile_type == 'Admin'
+  end
+
+  def teacher?
+    profile_type == 'Teacher'
+  end
 end
