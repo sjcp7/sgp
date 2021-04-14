@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_093054) do
+ActiveRecord::Schema.define(version: 2021_04_14_102744) do
 
   create_table "batches", force: :cascade do |t|
     t.integer "course_id", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_093054) do
     t.integer "quarter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "current"
   end
 
   create_table "school_years", force: :cascade do |t|
@@ -100,6 +101,20 @@ ActiveRecord::Schema.define(version: 2021_04_14_093054) do
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "lecture_id", null: false
+    t.float "score"
+    t.float "max_score"
+    t.string "kind"
+    t.integer "school_quarter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_id"], name: "index_tests_on_lecture_id"
+    t.index ["school_quarter_id"], name: "index_tests_on_school_quarter_id"
+    t.index ["student_id"], name: "index_tests_on_student_id"
   end
 
   create_table "users", force: :cascade do |t|

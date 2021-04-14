@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  lecture: one
+  score: 1.5
+  kind: MyString
+  school_quarter: one
+
+two:
+  student: two
+  lecture: two
+  score: 1.5
+  kind: MyString
+  school_quarter: two
