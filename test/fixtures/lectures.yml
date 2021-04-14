@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_subject: one
+  batch: one
+  teacher: one
+
+two:
+  course_subject: two
+  batch: two
+  teacher: two
