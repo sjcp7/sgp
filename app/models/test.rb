@@ -17,4 +17,6 @@ class Test < ApplicationRecord
     EX: 'EX',
     CF: 'CF'
   }
+
+  scope :find_by_school_quarter, ->(sq) { where(school_quarter: sq) }
 end
