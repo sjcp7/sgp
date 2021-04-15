@@ -32,8 +32,8 @@
                     <% tests.AC.each_with_index do |ac, num| %>
                         <%= link_to "AC#{num + 1}", edit_test_path(ac), class: 'button' %>
                     <% end %>
-                    <%= link_to 'PP', '#', class: 'button is-primary' %>
-                    <%= link_to 'PT', '#', class: 'button is-primary' %>
+                    <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
+                    <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
                   </div>
                 </td>
 
