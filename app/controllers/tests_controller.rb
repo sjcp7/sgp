@@ -15,13 +15,15 @@ class TestsController < ApplicationController
 
   def create
     students = Lecture.find(params[:lecture_id]).students
-    test = Test.create(test_params)
+    new_test = Test.create(test_params)
     student_tests_list = students.map do |student|
-      student_test_params(student, test)
+      student_test_params(student, new_test)
     end
+
+    p student_tests_list
     
     result = StudentTest.create(student_tests_list)
-    if result.all?(&:persisted?) && test.save? 
+    if result.all?(&:persisted?) && new_test.save
       flash[:notice] = 'Avaliação contínua criada com sucesso.'
       redirect_back fallback_location: proc { batch_lectures_path(batch) }
     else
@@ -34,12 +36,12 @@ class TestsController < ApplicationController
   private
 
   def test_params
-    params.require(:test).permit(:lecture_id, :school_quarter_id, :kind)
+    params.require(:test).permit(:lecture_id, :school_quarter_id, :kind, :max_score)
   end
 
-  def student_test_params(student, test)
-    other_params = { student: student, test: test }
-    params.require(:student_test).merge(other_params).permit(:test, :student, :score)
+  def student_test_params(student, new_test)
+    other_params = { student: student, test: new_test }
+    params.require(:student_test).permit(:test, :student, :score).merge(other_params)
   end
 
   def ac_tests_count(school_quarter)
