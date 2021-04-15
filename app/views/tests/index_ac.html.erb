@@ -39,9 +39,9 @@
           <tr>
             <td><%= student.full_name %></td>
             <% tests.AC.each do |test| %>
-              <td><%= test.score %></td>
+              <td><%= test.student_tests.first.score %></td>
             <% end %>
-            <td><%= tests.MAC.first.score %></td>           
+            <td><%= tests.MAC.first.student_tests.first.score %></td>           
           </tr>
         <% end %>
       </tbody>
