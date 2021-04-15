@@ -11,7 +11,7 @@ class Batch < ApplicationRecord
 
   def self.fetch_with_teacher(teacher)
     Batch.all.filter do |b|
-      b.lectures.where(teacher: teacher).exists?
+      b.lectures.find_by(teacher: teacher)
     end    
   end
 end
