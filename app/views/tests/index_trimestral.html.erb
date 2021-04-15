@@ -33,13 +33,15 @@
       </thead>
 
       <tbody>
-        <% @students.each do |student| %>
+        <% @students_with_tests.each do |student_with_tests| %>
+          <% student = student_with_tests[:student] %>
+          <% tests = student_with_tests[:tests] %>
           <tr>
             <th><%= student.full_name %></th>
-            <th><%= student.tests.MAC.find_by(school_quarter: @school_quarter).score %></th>
-            <th><%= student.tests.PP.find_by(school_quarter: @school_quarter).score %></th>
-            <th><%= student.tests.PT.find_by(school_quarter: @school_quarter).score %></th>
-            <th><%= student.tests.MT.find_by(school_quarter: @school_quarter).score %></th>
+            <th><%= tests.MAC.first.score %></th>
+            <th><%= tests.PP.first.score %></th>
+            <th><%= tests.PT.first.score %></th>
+            <th><%= tests.MT.first.score %></th>
           </tr>
         <% end %>
       </tbody>
