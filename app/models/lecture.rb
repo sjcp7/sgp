@@ -14,17 +14,35 @@ class Lecture < ApplicationRecord
   private
 
   def create_tests
-    self.students.each do |student|
-      Test.kinds.keys.each do |kind|
-        SchoolQuarter.all.each do |sq|
-          unless kind == 'AC'
-            student.tests.create(
-              lecture: self, score: 0, max_score: 20, school_quarter: sq, kind: kind
-            )
+    students = self.students
+    s_quarters = SchoolQuarter.all
+    kinds = Test.kinds.values
+    exceptions = ['AC', 'MAD', 'EX', 'CF']
+    create_regular_tests(students: students, kinds: kinds, quarters: s_quarters, exceptions: exceptions, lecture: self)
+    create_exception_tests(students: students, kinds: kinds, quarter: s_quarters.last, exceptions: exceptions, lecture: self)
+  end
+
+  def create_regular_tests(options)
+    options[:students].each do |student|
+      options[:kinds].each do |kind|
+        options[:quarters].each do |quarter|
+          unless kind.in?(options[:exceptions])
+            test = options[:lecture].tests.create(school_quarter: quarter, kind: kind, max_score: 20)
+            student.student_tests.create(test: test)
           end
         end
       end
     end
-  
+  end
+
+  def create_exception_tests(options)
+    options[:students].each do |student|
+      options[:kinds].each do |kind|
+        if kind.in?(options[:exceptions]) && kind != 'AC'
+          test = options[:lecture].tests.create(school_quarter: options[:quarter], kind: kind, max_score: 20)
+          student.student_tests.create(test: test)
+        end
+      end
+    end
   end
 end

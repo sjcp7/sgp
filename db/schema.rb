@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_164136) do
+ActiveRecord::Schema.define(version: 2021_04_15_101343) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 2021_04_14_164136) do
     t.boolean "current", default: false
   end
 
+  create_table "student_tests", force: :cascade do |t|
+    t.integer "test_id", null: false
+    t.integer "student_id", null: false
+    t.float "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_tests_on_student_id"
+    t.index ["test_id"], name: "index_student_tests_on_test_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -112,9 +122,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_164136) do
   end
 
   create_table "tests", force: :cascade do |t|
-    t.integer "student_id", null: false
     t.integer "lecture_id", null: false
-    t.float "score"
     t.float "max_score"
     t.string "kind"
     t.integer "school_quarter_id", null: false
@@ -122,7 +130,6 @@ ActiveRecord::Schema.define(version: 2021_04_14_164136) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lecture_id"], name: "index_tests_on_lecture_id"
     t.index ["school_quarter_id"], name: "index_tests_on_school_quarter_id"
-    t.index ["student_id"], name: "index_tests_on_student_id"
   end
 
   create_table "users", force: :cascade do |t|
