@@ -1,10 +1,12 @@
 class TestsController < ApplicationController
   def index
     @lecture = policy_scope(Lecture).find(params[:lecture_id])
-    @students = @lecture.students
     @school_quarter = SchoolQuarter.find(params[:school_quarter_id])
+    @students_with_tests = @lecture.students.map do |student|
+      { student: student, tests: student.tests.find_by_school_quarter(@school_quarter) }
+    end
+    @num_of_ac = ac_tests_count(@school_quarter)
     if params[:kind] == 'AC'
-      @num_of_ac = get_num_of_ac_by_school_grade(@school_quarter)
       render template: 'tests/index_ac'
     elsif params[:kind] == 'Trimestral'
       render template: 'tests/index_trimestral'
@@ -32,8 +34,8 @@ class TestsController < ApplicationController
   end
 
   private
-  
-  def get_num_of_ac_by_school_grade(school_quarter)
-    @students.first.tests.where(school_quarter: school_quarter).AC.count
+
+  def ac_tests_count(school_quarter)
+    @lecture.students.first.tests.AC.where(school_quarter: @school_quarter).size
   end
 end
