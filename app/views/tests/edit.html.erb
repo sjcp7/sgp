@@ -1,0 +1,60 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Editar Nota</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Curso</th>
+          <th>Disciplina</th>
+          <th>Turma</th>
+          <th>Ano Lectivo</th>
+          <th>Trimestre</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th><%= @test.lecture.course.description %></th>
+          <th><%= @test.lecture.subject.description %></th>
+          <th><%= @test.lecture.batch.description %></th>
+          <th><%= @test.lecture.school_year.year %></th>
+          <th><%= @test.school_quarter.quarter %></th>
+        </tr>
+      </tbody>
+    </table>
+
+    <%= form_with model: @test do |f|%>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Estudante</th>
+            <th>Nota</th>
+            <% if @test.AC? %>
+              <th>
+                Valor máximo:
+                <span class="select">
+                  <%= f.select :max_score, [5, 10], selected: @test.max_score  %> 
+                </span>
+                <!-- add js to dynamically add max value to scores -->
+              <th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @student_tests.each do |student_test| %>
+            <td><%= student_test.student.full_name %></td>
+            <%= f.fields_for 'student_tests_attributes[]', student_test do |st_form| %>
+              <td><%= st_form.number_field :score, min: 0, max: @test.max_score, step: '0.01', class: 'input student_score' %></td>
+              <%= st_form.hidden_field :student, value: student_test.student.id %>
+              <%= st_form.hidden_field :id, value: student_test.id %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= f.submit 'Salvar', class: 'button is-primary'%>
+    <% end %>
+  </div>
+</section>
+
+<%= javascript_pack_tag 'set_max_score' %>
