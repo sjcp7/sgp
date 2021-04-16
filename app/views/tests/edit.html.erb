@@ -33,7 +33,7 @@
               <th>
                 Valor máximo:
                 <span class="select">
-                  <%= f.select :max_score, [5, 10], selected: @test.max_score  %> 
+                  <%= f.select :max_score, [5, 10], selected: @test.max_score.to_i  %> 
                 </span>
               <th>
             <% end %>
