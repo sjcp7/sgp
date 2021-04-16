@@ -3,7 +3,7 @@ class TestsController < ApplicationController
     @lecture = policy_scope(Lecture).find(params[:lecture_id])
     @school_quarter = SchoolQuarter.find(params[:school_quarter_id])
     @students_with_tests = @lecture.students.map do |student|
-      { student: student, tests: student.tests.find_by_school_quarter(@school_quarter) }
+      { student: student, tests: student.tests.where(lecture: @lecture).find_by_school_quarter(@school_quarter) }
     end
     @num_of_ac = ac_tests_count(@school_quarter)
     if params[:kind] == 'AC'
@@ -13,14 +13,17 @@ class TestsController < ApplicationController
     end
   end
 
+  def edit
+    @test = Test.find(params[:id])
+    @student_tests = @test.student_tests
+  end
+
   def create
     students = Lecture.find(params[:lecture_id]).students
     new_test = Test.create(test_params)
     student_tests_list = students.map do |student|
       student_test_params(student, new_test)
     end
-
-    p student_tests_list
     
     result = StudentTest.create(student_tests_list)
     if result.all?(&:persisted?) && new_test.save
@@ -33,10 +36,22 @@ class TestsController < ApplicationController
     end
   end
 
+  def update
+    @test = Test.find(params[:id])
+    @test.update(test_params)
+    batch = @test.lecture.batch
+    if @test.save
+      redirect_to batch_lectures_path(batch), notice: 'Notas actualizadas com sucesso.'
+    else
+      flash.now[:alert] = 'Não foi possível actualizar notas.'
+      redirect_back fallback_location: proc { batch_lectures_path(batch) }
+    end
+  end
+
   private
 
   def test_params
-    params.require(:test).permit(:lecture_id, :school_quarter_id, :kind, :max_score)
+    params.require(:test).permit(:lecture, :school_quarter, :kind, :max_score, student_tests_attributes: [:id, :score, :student_id])
   end
 
   def student_test_params(student, new_test)
