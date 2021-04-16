@@ -9,6 +9,7 @@ class Test < ApplicationRecord
   has_many :students, through: :student_tests
 
   accepts_nested_attributes_for :student_tests
+  after_update :update_student_tests
 
   enum kind: {
     AC: 'AC',
@@ -23,4 +24,12 @@ class Test < ApplicationRecord
 
   scope :find_by_school_quarter, ->(sq) { where(school_quarter: sq) }
   scope :score, ->{ student_tests.first.score }
+
+  private
+
+  def update_student_tests
+    if self.AC?
+      self.student_tests.each { |st| st.update_student_tests }
+    end
+  end
 end
