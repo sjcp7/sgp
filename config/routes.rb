@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   end
 
   resources :lectures do
-    resources :tests, shallow: true
+    resources :tests, shallow: true do
+      resources :student_tests, only: %i[ index create update ], shallow: true
+    end
   end
 
   resources :teachers, :students, :courses, :subjects, :admins
