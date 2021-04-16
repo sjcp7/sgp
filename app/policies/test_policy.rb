@@ -12,4 +12,8 @@ class TestPolicy < ApplicationPolicy
   def create?
     user.admin? or record.AC?
   end
+
+  def update?
+    user.admin? or record.AC? or record.PP? or record.PT?
+  end
 end
