@@ -5,8 +5,10 @@ class Test < ApplicationRecord
   has_one :course_subject, through: :lecture
   has_one :school_grade, through: :course_subject
   has_one :school_year, through: :lecture
-  has_many :student_tests
+  has_many :student_tests, dependent: :destroy
   has_many :students, through: :student_tests
+
+  accepts_nested_attributes_for :student_tests
 
   enum kind: {
     AC: 'AC',
@@ -20,4 +22,5 @@ class Test < ApplicationRecord
   }
 
   scope :find_by_school_quarter, ->(sq) { where(school_quarter: sq) }
+  scope :score, ->{ student_tests.first.score }
 end
