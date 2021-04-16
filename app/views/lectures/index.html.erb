@@ -1,7 +1,6 @@
 <section class="section">
   <div class="container">
     <h1 class="title"><%= @batch.description %></h1>
-
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -37,9 +36,18 @@
                   </div>
                 </td>
 
-                <td><%= link_to 'Adicionar', lecture_tests_path(lecture,
-                    test: { lecture_id: lecture.id, max_score: 5, kind: 'AC', school_quarter_id: sq.id }, student_test: { score: 0 }
-                  ), class: 'button', method: :post %>
+                <% student_tests_attributes = [] %>
+                <% lecture.students.each do |student| %>
+                  <%
+                    student_tests_attributes << { score: 0, student_id: student.id }
+                  %>
+                <% end %>
+
+                <td>
+                  <%= link_to 'Adicionar', lecture_tests_path(lecture,
+                        test: { lecture_id: lecture, max_score: 5, kind: 'AC', school_quarter_id: sq, 
+                        student_tests_attributes: student_tests_attributes }
+                      ), class: 'button', method: :post %>
                 </td>
               </tr>
             <% end %>
