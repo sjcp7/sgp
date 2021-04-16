@@ -41,7 +41,7 @@
             <% tests.AC.each do |test| %>
               <td><%= test.student_tests.first.score %></td>
             <% end %>
-            <td><%= tests.MAC.first.student_tests.first.score %></td>           
+            <td><%= tests.MAC.first.student_tests.first.score.round(2) %></td>           
           </tr>
         <% end %>
       </tbody>

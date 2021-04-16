@@ -38,10 +38,10 @@
           <% tests = student_with_tests[:tests] %>
           <tr>
             <th><%= student.full_name %></th>
-            <th><%= tests.MAC.first.student_tests.first.score %></th>
+            <th><%= tests.MAC.first.student_tests.first.score.round(2) %></th>
             <th><%= tests.PP.first.student_tests.first.score %></th>
             <th><%= tests.PT.first.student_tests.first.score %></th>
-            <th><%= tests.MT.first.student_tests.first.score %></th>
+            <th><%= tests.MT.first.student_tests.first.score.round(2) %></th>
           </tr>
         <% end %>
       </tbody>
