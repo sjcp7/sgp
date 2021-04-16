@@ -4,6 +4,7 @@ class Test < ApplicationRecord
   has_one :teacher, through: :lecture
   has_one :course_subject, through: :lecture
   has_one :school_grade, through: :course_subject
+  has_one :course, through: :course_subject
   has_one :school_year, through: :lecture
   has_many :student_tests, dependent: :destroy
   has_many :students, through: :student_tests
