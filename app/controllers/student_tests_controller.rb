@@ -1,7 +1,4 @@
 class StudentTestsController < ApplicationController
-  def create
-  end
-
   def update
     @student_test = StudentTests.create(student_tests_params)
     batch = @student_test.test.lecture.batch
