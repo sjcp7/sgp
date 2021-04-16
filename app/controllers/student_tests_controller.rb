@@ -17,6 +17,6 @@ class StudentTestsController < ApplicationController
   private
 
   def student_tests_params
-    params.require(:student_tests).permit(:max_score, student_test: [:score, :student, :test])
+    params.require(:student_tests).permit(student_test: [:score, :student, :test])
   end
 end
