@@ -43,14 +43,14 @@
           <% tests = student_with_tests[:tests] %>
           <tr>
             <th><%= student.full_name %></th>
-            <th><%= tests.MAC.first.student_tests.find_by(student: student).score.round(2) %></th>
-            <th><%= tests.PP.first.student_tests.find_by(student: student).score %></th>
-            <th><%= tests.PT.first.student_tests.find_by(student: student).score %></th>
-            <th><%= tests.MT.first.student_tests.find_by(student: student).score.round(2) %></th>
+            <th><%= tests.MAC.first.student_tests.find_by_student(student).first.score.round(2) %></th>
+            <th><%= tests.PP.first.student_tests.find_by_student(student).first.score %></th>
+            <th><%= tests.PT.first.student_tests.find_by_student(student).first.score %></th>
+            <th><%= tests.MT.first.student_tests.find_by_student(student).first.score.round(2) %></th>
             <% if @school_quarter.quarter == 3 %>
-              <th><%= tests.MAD.first.student_tests.find_by(student: student).score.round(2) %></th>
-              <th><%= tests.EX.first.student_tests.find_by(student: student).score %></th>
-              <th><%= tests.CF.first.student_tests.find_by(student: student).score.round(2) %></th>
+              <th><%= tests.MAD.first.student_tests.find_by_student(student).first.score.round(2) %></th>
+              <th><%= tests.EX.first.student_tests.find_by_student(student).first.score %></th>
+              <th><%= tests.CF.first.student_tests.find_by_student(student).first.score.round(2) %></th>
             <% end %>
           </tr>
         <% end %>
