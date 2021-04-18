@@ -42,12 +42,14 @@
 
         <tbody>
           <% @student_tests.each do |student_test| %>
-            <td><%= student_test.student.full_name %></td>
-            <%= f.fields_for 'student_tests_attributes[]', student_test do |st_form| %>
-              <td><%= st_form.number_field :score, min: 0, max: @test.max_score, step: '0.01', class: 'input student_score' %></td>
-              <%= st_form.hidden_field :student_id, value: student_test.student.id %>
-              <%= st_form.hidden_field :id, value: student_test.id %>
-            <% end %>
+            <tr>
+              <td><%= student_test.student.full_name %></td>
+              <%= f.fields_for 'student_tests_attributes[]', student_test do |st_form| %>
+                <td><%= st_form.number_field :score, min: 0, max: @test.max_score, step: '0.01', class: 'input student_score' %></td>
+                <%= st_form.hidden_field :student_id, value: student_test.student.id %>
+                <%= st_form.hidden_field :id, value: student_test.id %>
+              <% end %>
+            </tr>
           <% end %>
         </tbody>
       </table>
