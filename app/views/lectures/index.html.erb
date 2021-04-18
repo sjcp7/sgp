@@ -33,6 +33,9 @@
                     <% end %>
                     <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
                     <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
+                    <% if sq.quarter == 3 %>
+                      <%= link_to 'EX', edit_test_path(tests.EX.first), class: 'button is-primary' %>
+                    <% end %>
                   </div>
                 </td>
 
