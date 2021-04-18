@@ -8,6 +8,8 @@ class Test < ApplicationRecord
   has_one :school_year, through: :lecture
   has_many :student_tests, dependent: :destroy
   has_many :students, through: :student_tests
+  has_one :batch, through: :lecture
+  has_one :subject, through: :lecture
 
   accepts_nested_attributes_for :student_tests
   after_update :update_student_tests

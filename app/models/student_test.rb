@@ -2,6 +2,8 @@ class StudentTest < ApplicationRecord
   belongs_to :test
   belongs_to :student
   has_one :school_quarter, through: :test
+  has_one :batch, through: :test
+  has_one :subject, through: :test
 
   after_update :update_student_tests
 
