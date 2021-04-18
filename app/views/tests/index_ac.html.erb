@@ -39,9 +39,9 @@
           <tr>
             <td><%= student.full_name %></td>
             <% tests.AC.each do |test| %>
-              <td><%= test.student_tests.first.score %></td>
+              <td><%= test.student_tests.where(student: student).first.score %></td>
             <% end %>
-            <td><%= tests.MAC.first.student_tests.first.score.round(2) %></td>           
+            <td><%= tests.MAC.first.student_tests.where(student: student).first.score.round(2) %></td>           
           </tr>
         <% end %>
       </tbody>
