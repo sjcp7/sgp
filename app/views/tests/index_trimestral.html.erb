@@ -32,6 +32,7 @@
           <% if @school_quarter.quarter == 3 %>
             <th><abbr title="Média Anual da Disciplina">MAD</abbr></th>
             <th><abbr title="Exame">EX</abbr></th>
+            <th><abbr title="Classificação Final">CF</abbr></th>
           <% end %>
         </tr>
       </thead>
@@ -49,6 +50,7 @@
             <% if @school_quarter.quarter == 3 %>
               <th><%= tests.MAD.first.student_tests.find_by(student: student).score.round(2) %></th>
               <th><%= tests.EX.first.student_tests.find_by(student: student).score %></th>
+              <th><%= tests.CF.first.student_tests.find_by(student: student).score.round(2) %></th>
             <% end %>
           </tr>
         <% end %>
