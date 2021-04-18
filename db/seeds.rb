@@ -62,6 +62,7 @@ students = Student.create(student_list)
 Enrollment.destroy_all
 enrollment_list = [
   { batch: Batch.find_by(school_year: school_years.first), student: Student.find_by(first_name: 'Mauro') },
+  { batch: Batch.find_by(school_year: school_years.first), student: Student.find_by(first_name: 'Vambert') },
   { 
     batch: Batch.find_by(
       school_year: school_years.last, school_grade: school_grades.first, course: courses.first
