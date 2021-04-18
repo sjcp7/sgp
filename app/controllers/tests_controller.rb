@@ -49,6 +49,6 @@ class TestsController < ApplicationController
   end
 
   def ac_tests_count(school_quarter)
-    @lecture.students.first.tests.AC.where(school_quarter: @school_quarter).size
+    @lecture.students.first.tests.AC.find_by_school_quarter(@school_quarter).size
   end
 end
