@@ -14,6 +14,8 @@ class StudentTest < ApplicationRecord
       update_MT(sq, tests)
     elsif self.test.MT?
       update_MAD(sq, tests)
+    elsif self.test.EX?
+      update_CF(tests)
     end
   end
 
@@ -87,5 +89,13 @@ class StudentTest < ApplicationRecord
       average = mts.reduce(:+) / 3
       mad.update(score: average)
     end
+  end
+
+  def update_CF(tests)
+    cf = tests.CF.first.student_tests.where(student: self.student).first
+    mad = tests.MAD.first.student_tests.where(student: self.student).first
+    ex = tests.EX.first.student_tests.where(student: self.student).first
+    score = (mad.score * 0.4) + (ex.score * 0.6)
+    cf.update(score: score)
   end
 end
