@@ -7,7 +7,7 @@ class StudentTest < ApplicationRecord
 
   def update_student_tests
     sq = self.test.school_quarter
-    tests = self.student.tests
+    tests = self.student.tests.where(lecture: self.test.lecture)
     if self.test.AC?
       update_MAC(sq, tests)
     elsif self.test.PP? || self.test.PT? || self.test.MAC?
