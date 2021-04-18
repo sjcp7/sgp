@@ -57,8 +57,8 @@ class StudentTest < ApplicationRecord
 
   def update_MT_Technical(p)
     past_sq = p[:sqs][p[:sqs].find_index(p[:sq]) - 1]
-    past_mac = p[:tests].MAC.find_by_school_quarter(past_sq).first.student_tests.where(student: self.student).first
-    average = (past_mac.score + p[:mac].score + p[:pp].score + p[:pt].score) / 4
+    past_mt = p[:tests].MT.find_by_school_quarter(past_sq).first.student_tests.where(student: self.student).first
+    average = (past_mt.score + p[:mac].score + p[:pp].score + p[:pt].score) / 4
     p[:mt].update(score: average)
   end
 
