@@ -10,8 +10,10 @@ class StudentTest < ApplicationRecord
     tests = self.student.tests
     if self.test.AC?
       update_MAC(sq, tests)
-    elsif self.test.PP? || self.test.PT?
+    elsif self.test.PP? || self.test.PT? || self.test.MAC?
       update_MT(sq, tests)
+    elsif self.test.MT?
+      update_MAD(sq, tests)
     end
   end
 
@@ -58,5 +60,32 @@ class StudentTest < ApplicationRecord
     past_mac = p[:tests].MAC.find_by_school_quarter(past_sq).first.student_tests.where(student: self.student).first
     average = (past_mac.score + p[:mac].score + p[:pp].score + p[:pt].score) / 4
     p[:mt].update(score: average)
+  end
+
+  def update_MAD(sq, tests)
+    mad = tests.MAD.first.student_tests.where(student: self.student).first
+    if self.test.course.technical?
+      update_MAD_Technical(sq, tests, mad)
+    elsif self.test.course.puniv?
+      update_MAD_PUNIV(sq, tests, mad)
+    end
+  end
+
+  def update_MAD_Technical(sq, tests, mad)
+    if sq.quarter == 3
+      
+      mt = tests.MT.find_by_school_quarter(sq).first.student_tests.where(student: self.student).first
+      mad.update(score: mt.score)
+    end
+  end
+
+  def update_MAD_PUNIV(sq, tests, mad)
+    if sq.quarter == 3
+      mts = tests.MT.map do |mt|
+        mt.student_tests.where(student: self.student).first.score
+      end
+      average = mts.reduce(:+) / 3
+      mad.update(score: average)
+    end
   end
 end
