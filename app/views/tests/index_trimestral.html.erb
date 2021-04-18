@@ -29,6 +29,9 @@
           <th><abbr title="Prova do Professor">PP</abbr></th>
           <th><abbr title="Prova do Trimestre">PT</abbr></th>
           <th><abbr title="Média Trimestral">MT</abbr></th>
+          <% if @school_quarter.quarter == 3 %>
+            <th><abbr title="Média Anual da Disciplina">MAD</abbr><th>
+          <% end %>
         </tr>
       </thead>
 
@@ -42,6 +45,9 @@
             <th><%= tests.PP.first.student_tests.find_by(student: student).score %></th>
             <th><%= tests.PT.first.student_tests.find_by(student: student).score %></th>
             <th><%= tests.MT.first.student_tests.find_by(student: student).score.round(2) %></th>
+            <% if @school_quarter.quarter == 3 %>
+              <th><%= tests.MAD.first.student_tests.find_by(student: student).score %></th>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
