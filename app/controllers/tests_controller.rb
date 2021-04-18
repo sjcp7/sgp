@@ -3,7 +3,7 @@ class TestsController < ApplicationController
     @lecture = policy_scope(Lecture).find(params[:lecture_id])
     @school_quarter = SchoolQuarter.find(params[:school_quarter_id])
     @students_with_tests = @lecture.students.map do |student|
-      { student: student, tests: student.tests.where(lecture: @lecture).find_by_school_quarter(@school_quarter) }
+      { student: student, tests: student.tests.find_by_lecture(@lecture).find_by_school_quarter(@school_quarter) }
     end
     @num_of_ac = ac_tests_count(@school_quarter)
     if params[:kind] == 'AC'

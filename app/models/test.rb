@@ -27,6 +27,8 @@ class Test < ApplicationRecord
 
   scope :find_by_school_quarter, ->(sq) { where(school_quarter: sq) }
   scope :score, ->{ student_tests.first.score }
+  scope :find_by_lecture, ->(lecture) { where(lecture: lecture) }
+
 
   private
 
