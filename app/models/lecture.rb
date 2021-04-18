@@ -27,8 +27,8 @@ class Lecture < ApplicationRecord
       options[:kinds].each do |kind|
         options[:quarters].each do |quarter|
           unless kind.in?(options[:exceptions])
-            test = options[:lecture].tests.create(school_quarter: quarter, kind: kind, max_score: 20)
-            student.student_tests.create(test: test, score: 0)
+            new_test = options[:lecture].tests.find_or_create_by(school_quarter: quarter, kind: kind, max_score: 20)
+            student.student_tests.create(test: new_test, score: 0)
           end
         end
       end
@@ -39,8 +39,8 @@ class Lecture < ApplicationRecord
     options[:students].each do |student|
       options[:kinds].each do |kind|
         if kind.in?(options[:exceptions]) && kind != 'AC'
-          test = options[:lecture].tests.create(school_quarter: options[:quarter], kind: kind, max_score: 20)
-          student.student_tests.create(test: test, score: 0)
+          new_test = options[:lecture].tests.find_or_create_by(school_quarter: options[:quarter], kind: kind, max_score: 20)
+          student.student_tests.create(test: new_test, score: 0)
         end
       end
     end
