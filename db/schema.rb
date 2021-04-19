@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_101343) do
+ActiveRecord::Schema.define(version: 2021_04_19_124036) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_101343) do
     t.integer "school_quarter_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "locked", default: false
     t.index ["lecture_id"], name: "index_tests_on_lecture_id"
     t.index ["school_quarter_id"], name: "index_tests_on_school_quarter_id"
   end
