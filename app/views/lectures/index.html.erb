@@ -12,48 +12,44 @@
         </tr>
       </thead>
       <tbody>
-        <% @lectures_with_tests.each do |lecture_with_tests| %>
+        <% @lectures.each do |lecture| %>
           <% @school_quarters.each do |sq| %>
-            <% if lecture_with_tests[:sq] == sq %>
-              <% lecture = lecture_with_tests[:lecture] %>
-              <% tests = lecture_with_tests[:tests] %>
-              <tr>
-                <td><%= lecture.subject.description %></td>
-                <td><%= sq.quarter %></td>
-                <td>
-                  <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC', school_quarter_id: sq.id), 
-                    class: 'button is-link is-light' %>
-                  <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral', school_quarter_id: sq.id), 
-                    class: 'button is-link is-light' %>
-                </td>
-                <td>
-                  <div class="buttons are-small">
-                    <% tests.AC.each_with_index do |ac, num| %>
-                        <%= link_to "AC#{num + 1}", edit_test_path(ac), class: 'button' %>
-                    <% end %>
-                    <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
-                    <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
-                    <% if sq.quarter == 3 %>
-                      <%= link_to 'EX', edit_test_path(tests.EX.first), class: 'button is-primary' %>
-                    <% end %>
-                  </div>
-                </td>
-
-                <% student_tests_attributes = [] %>
-                <% lecture.students.each do |student| %>
-                  <%
-                    student_tests_attributes << { score: 0, student_id: student.id }
-                  %>
-                <% end %>
-
-                <td>
-                  <%= link_to 'Adicionar', lecture_tests_path(lecture,
-                        test: { lecture_id: lecture, max_score: 5, kind: 'AC', school_quarter_id: sq, 
-                        student_tests_attributes: student_tests_attributes }
-                      ), class: 'button', method: :post %>
-                </td>
-              </tr>
-            <% end %>
+            <% tests = lecture.tests.find_by_school_quarter(sq) %>
+            <tr>
+              <td><%= lecture.subject.description %></td>
+              <td><%= sq.quarter %></td>
+              <td>
+                <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC', school_quarter_id: sq.id), 
+                  class: 'button is-link is-light' %>
+                <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral', school_quarter_id: sq.id), 
+                  class: 'button is-link is-light' %>
+              </td>
+              <td>
+                <div class="buttons are-small">
+                  <% tests.AC.each_with_index do |ac, num| %>
+                      <%= link_to "AC#{num + 1}", edit_test_path(ac), class: 'button' %>
+                  <% end %>
+                  <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
+                  <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
+                  <% if sq.quarter == 3 %>
+                    <%= link_to 'EX', edit_test_path(tests.EX.first), class: 'button is-primary' %>
+                  <% end %>
+                </div>
+              </td>
+              <% student_tests_attributes = [] %>
+              <% lecture.students.each do |student| %>
+                <%
+                  student_tests_attributes << { score: 0, student_id: student.id }
+                %>
+              <% end %>
+              <td>
+                <%= link_to 'Adicionar', lecture_tests_path(lecture,
+                      test: { lecture_id: lecture, max_score: 5, kind: 'AC', school_quarter_id: sq, 
+                      student_tests_attributes: student_tests_attributes }
+                    ), class: 'button', method: :post %>
+              </td>
+            </tr>
+            
           <% end %>
         <% end %>        
       </tbody>
