@@ -16,33 +16,40 @@ class Lecture < ApplicationRecord
   def create_tests
     students = self.students
     s_quarters = SchoolQuarter.all
-    kinds = Test.kinds.values
-    exceptions = ['AC', 'MAD', 'EX', 'CF']
-    create_regular_tests(students: students, kinds: kinds, quarters: s_quarters, exceptions: exceptions, lecture: self)
-    create_exception_tests(students: students, kinds: kinds, quarter: s_quarters.last, exceptions: exceptions, lecture: self)
+    third_quarter = ['MAD', 'EX', 'CF']
+    locked_kinds = ['PP', 'PT']
+    general_kinds = Test.kinds.values - ['AC'] - third_quarter - locked_kinds
+    create_regular_tests(students: students, kinds: general_kinds, quarters: s_quarters)
+    create_locked_tests(students: students, kinds: locked_kinds, quarters: s_quarters)
+    create_locked_tests(students: students, kinds: third_quarter, quarter: s_quarters.third)
   end
 
   def create_regular_tests(options)
     options[:students].each do |student|
       options[:kinds].each do |kind|
         options[:quarters].each do |quarter|
-          unless kind.in?(options[:exceptions])
-            new_test = options[:lecture].tests.find_or_create_by(school_quarter: quarter, kind: kind, max_score: 20)
-            student.student_tests.create(test: new_test, score: 0)
+          create_test(student, quarter, kind, false)
+        end
+      end
+    end
+  end
+
+  def create_locked_tests(options)
+    options[:students].each do |student|
+      options[:kinds].each do |kind|
+        if options[:quarter]
+          create_test(student, options[:quarter], kind, true)
+        else
+          options[:quarters].each do |quarter|
+            create_test(student, quarter, kind, true)
           end
         end
       end
     end
   end
 
-  def create_exception_tests(options)
-    options[:students].each do |student|
-      options[:kinds].each do |kind|
-        if kind.in?(options[:exceptions]) && kind != 'AC'
-          new_test = options[:lecture].tests.find_or_create_by(school_quarter: options[:quarter], kind: kind, max_score: 20)
-          student.student_tests.create(test: new_test, score: 0)
-        end
-      end
-    end
+  def create_test(student, quarter, kind, locked)
+    new_test = self.tests.find_or_create_by(school_quarter: quarter, kind: kind, max_score: 20, locked: locked)
+    student.student_tests.create(test: new_test, score: 0)
   end
 end
