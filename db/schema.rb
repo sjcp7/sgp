@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_124036) do
+ActiveRecord::Schema.define(version: 2021_04_19_165819) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(version: 2021_04_19_124036) do
     t.index ["batch_id"], name: "index_lectures_on_batch_id"
     t.index ["course_subject_id"], name: "index_lectures_on_course_subject_id"
     t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "teacher_id", null: false
+    t.integer "test_id", null: false
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["teacher_id"], name: "index_requests_on_teacher_id"
+    t.index ["test_id"], name: "index_requests_on_test_id"
   end
 
   create_table "school_grades", force: :cascade do |t|
