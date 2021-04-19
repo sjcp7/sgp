@@ -14,6 +14,6 @@ class TestPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? or record.AC? or record.PP? or record.PT?
+    user.admin? or (record.teacher == user.profile && (record.AC? or record.PP? or record.PT?))
   end
 end

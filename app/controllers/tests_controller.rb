@@ -15,6 +15,7 @@ class TestsController < ApplicationController
 
   def edit
     @test = Test.find(params[:id])
+    authorize @test
     @student_tests = @test.student_tests
   end
 
