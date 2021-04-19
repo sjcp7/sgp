@@ -25,16 +25,7 @@
                   class: 'button is-link is-light' %>
               </td>
               <td>
-                <div class="buttons are-small">
-                  <% tests.AC.each_with_index do |ac, num| %>
-                      <%= link_to "AC#{num + 1}", edit_test_path(ac), class: 'button' %>
-                  <% end %>
-                  <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
-                  <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
-                  <% if sq.quarter == 3 %>
-                    <%= link_to 'EX', edit_test_path(tests.EX.first), class: 'button is-primary' %>
-                  <% end %>
-                </div>
+                <%= render 'lectures/tests_buttons', sq: sq, tests: tests %>
               </td>
               <% student_tests_attributes = [] %>
               <% lecture.students.each do |student| %>
