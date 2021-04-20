@@ -1,4 +1,14 @@
 class StudentsController < ApplicationController
+  def index
+    @students = Student.all
+    authorize @students
+  end
+
+  def edit
+    @student = Student.find(params[:id])
+    authorize @student
+  end
+
   def new
     @student = Student.new
   end
@@ -10,6 +20,16 @@ class StudentsController < ApplicationController
     else
       flash.now[:alert] = 'Não foi possível criar estudante.'
       render :new
+    end
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    if @student.update(student_params)
+      redirect_to students_path, notice: 'Estudante actualizado com sucesso.'
+    else
+      flash.now[:alert] = 'Não foi possível actualizar estudante.'
+      render :edit
     end
   end
 

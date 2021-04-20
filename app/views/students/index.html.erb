@@ -1,0 +1,10 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Estudantes</h2>
+    <ul>
+      <% @students.each do |student| %>
+        <li><%= student.full_name %> | <%= link_to 'Editar', edit_student_path(student) %></li>
+      <% end %>
+    </ul>
+  </div>
+</section>
