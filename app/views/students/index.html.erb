@@ -1,10 +1,21 @@
 <section class="section">
   <div class="container">
-    <h2 class="title">Estudantes</h2>
-    <ul>
-      <% @students.each do |student| %>
-        <li><%= student.full_name %> | <%= link_to 'Editar', edit_student_path(student) %></li>
-      <% end %>
-    </ul>
+    <h2 class="title">Estudantes | <%= link_to 'Novo', new_student_path %></h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td><%= student.full_name %></td>
+            <td><%= link_to 'Editar', edit_student_path(student), class: 'button' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </section>
