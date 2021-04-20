@@ -1,0 +1,23 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Disciplinas | <%= link_to 'Novo', new_subject_path %></h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <td>Descrição</td>
+          <td>Abreviação</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subjects.each do |subject| %>
+          <tr>
+            <td><%= subject.description %></td>
+            <td><%= subject.acronymn %></td>
+            <td><%= link_to 'Editar', edit_subject_path(subject), class: 'button' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
