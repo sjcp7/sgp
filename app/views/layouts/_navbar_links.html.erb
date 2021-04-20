@@ -3,6 +3,7 @@
   <%= link_to 'Disciplinas', subjects_path, class: 'navbar-item' %>
   <%= link_to 'Estudantes', students_path, class: 'navbar-item' %>
   <%= link_to 'Turmas', batches_path, class: 'navbar-item' %>
+  <%= link_to 'Professores', teachers_path, class: 'navbar-item' %>
 <% elsif current_user.teacher? %>
   <%= link_to 'Minhas Turmas', batches_path, class: 'navbar-item' %>
 <% end %>
