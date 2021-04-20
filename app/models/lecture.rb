@@ -11,6 +11,8 @@ class Lecture < ApplicationRecord
 
   after_create :create_tests
 
+  scope :find_by_teacher, ->(teacher) { where(teacher: teacher) }
+
   private
 
   def create_tests
