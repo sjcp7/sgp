@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title"><%= @teacher.full_name %></h2>
+    <h3 class="subtitle">Disciplinas</h3>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Abreviação</th>
+          <th>Turma</th>
+          <th>Ano Lectivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lectures.each do |lecture| %>
+          <tr>
+            <td><%= lecture.subject.description %></td>
+            <td><%= lecture.subject.acronymn %></td>
+            <td><%= lecture.batch.description %></td>
+            <td><%= lecture.batch.school_year.year %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</section>

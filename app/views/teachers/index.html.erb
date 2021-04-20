@@ -1,0 +1,25 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Professores | <%= link_to 'Novo', new_teacher_path %></h2>
+
+    <table class="table is-fullwidth">
+      <thead>
+        <tr> 
+          <td>Nome</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @teachers.each do |teacher| %>
+          <tr>
+            <td><%= teacher.full_name %></td>
+            <td>
+              <%= link_to 'Abrir', teacher_path(teacher), class: 'button' %>
+              <%= link_to 'Editar', edit_teacher_path(teacher), class: 'button' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
