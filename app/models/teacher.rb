@@ -1,5 +1,5 @@
 class Teacher < ApplicationRecord
-  has_one :user, as: :profile
+  has_one :user, as: :profile, dependent: :destroy
   has_many :lectures
   has_many :batches, through: :lectures
   has_many :course_subjects, through: :lectures
