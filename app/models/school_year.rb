@@ -1,10 +1,11 @@
 class SchoolYear < ApplicationRecord
-  scope :current, ->{ find_by(current: true) }
+  scope :current, ->{ where(current: true) }
+  before_update :update_current
 
-  def self.current=(school_year)
-    current.each do |sy|
-      sy.update(current: false)
-    end
-    school_year.update(current: true) and return
+  private
+
+  def update_current
+    current_sq = SchoolYear.current.first
+    current_sq.update(current: false) unless current_sq == self
   end
 end
