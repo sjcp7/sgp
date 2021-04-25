@@ -4,6 +4,14 @@
   <%= link_to 'Estudantes', students_path, class: 'navbar-item' %>
   <%= link_to 'Turmas', batches_path, class: 'navbar-item' %>
   <%= link_to 'Professores', teachers_path, class: 'navbar-item' %>
+  <div class="navbar-item has-dropdown is-hoverable">
+    <span class="navbar-link">Definições</span>
+    <div class="navbar-dropdown">
+      <%= link_to 'Anos Lectivos', school_years_path, class: 'navbar-item' %>
+      <%= link_to 'Trimestres', school_quarters_path, class: 'navbar-item' %>
+      <%= link_to 'Administradores', admins_path, class: 'navbar-item' %>
+    </div>
+  </div>
 <% elsif current_user.teacher? %>
   <%= link_to 'Minhas Turmas', batches_path, class: 'navbar-item' %>
 <% end %>
