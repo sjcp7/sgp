@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Anos Lectivos | <%= link_to 'Novo', new_school_year_path %></h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Ano Lectivo</th>
+          <th>Actual?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @school_years.each do |sy| %>
+          <tr>
+            <td><%= sy.year %></td>
+            <td>
+              <% if sy.current == true %>
+                Sim
+              <% else%>
+                Não
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'Definir como actual', 
+                school_year_path(sy, school_year: { id: sy.id, current: true }), 
+                method: :patch, data: { confirm: 'Tem a certeza?' }, class: 'button' %>
+            </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

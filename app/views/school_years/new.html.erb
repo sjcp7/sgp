@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Novo Ano Lectivo</h2>
+    <%= form_with model: @school_year, class: 'form' do |f| %>
+      <div class="field">
+        <%= f.label :school_year, 'Ano Lectivo', class: 'label' %>
+        <div class="control">
+          <%= f.text_field :school_year, class: 'input' %>
+        </div>
+      </div>
+      <%= f.submit 'Salvar', class: 'button is-primary' %>
+    <% end %>
+  </div>
+</section>
