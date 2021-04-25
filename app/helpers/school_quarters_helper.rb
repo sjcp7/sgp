@@ -1,0 +1,2 @@
+module SchoolQuartersHelper
+end

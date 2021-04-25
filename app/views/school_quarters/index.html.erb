@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Trimestres</h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Trimestre</th>
+          <th>Actual?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @school_quarters.each do |quarter| %>
+          <tr>
+            <td><%= quarter.quarter %></td>
+            <td>
+              <% if quarter.current == true %>
+                Sim
+              <% else %>
+                Não
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'Definir como actual', 
+                school_quarter_path(quarter, school_quarter: { id: quarter.id, current: :true }), 
+                method: :patch, data: { confirm: 'Tem a certeza?' }, class: 'button' %>
+            </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
