@@ -1,0 +1,33 @@
+<%= form_with(model: admin) do |form| %>
+  <% if admin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(admin.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+        <% admin.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name, 'Primeiro nome', class: 'label' %>
+    <div class="control">
+      <%= form.text_field :first_name, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name, 'Último nome', class: 'label' %>
+    <div class="control">
+      <%= form.text_field :last_name, class: 'input' %>
+    </div>
+  </div>
+
+  <%= render 'shared/user_form_fields', form: form %>
+
+  <div class="actions">
+    <%= form.submit 'Ok', class: 'button is-primary' %>
+  </div>
+<% end %>
