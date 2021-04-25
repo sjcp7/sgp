@@ -5,7 +5,7 @@ class SchoolYear < ApplicationRecord
   private
 
   def update_current
-    current_sq = SchoolYear.current.first
-    current_sq.update(current: false) unless current_sq == self
+    current_sy = SchoolYear.current.first
+    current_sy.update(current: false) unless current_sy == self
   end
 end
