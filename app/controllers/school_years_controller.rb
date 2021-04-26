@@ -20,9 +20,9 @@ class SchoolYearsController < ApplicationController
   def update
     @school_year = SchoolYear.find(params[:id])
     if @school_year.update(school_year_params)
-      redirect_to school_years_path, notice: 'Ano lectivo criado com sucesso.'
+      redirect_to school_years_path, notice: 'Ano lectivo actualizado com sucesso.'
     else
-      flash.now[:alert] = 'Não foi possível criar ano lectivo.'
+      flash.now[:alert] = 'Não foi possível actualizado ano lectivo.'
       render :edit
     end
   end
