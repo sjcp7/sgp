@@ -1,11 +1,27 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">Courses</h1>
-    <ul>
-      <% @courses.each do |course| %>
-        <li><%= course.acronymn %> | <%= link_to 'See', course_path(course) %> </li>
-      <% end %>
-    </ul>
+    <h1 class="title">Cursos | <%= link_to 'Novo', new_course_path %></h1>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Abreviação</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |course| %>
+          <tr>
+            <td><%= course.description %></td>
+            <td><%= course.acronymn %></td>
+            <td>
+              <%= link_to 'Abrir', course_path(course), class: 'button' %>
+              <%= link_to 'Editar', edit_course_path(course), class: 'button' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </section>
     
