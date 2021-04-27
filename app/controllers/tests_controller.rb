@@ -46,7 +46,7 @@ class TestsController < ApplicationController
   private
 
   def test_params
-    params.require(:test).permit(:lecture_id, :school_quarter_id, :kind, :max_score, student_tests_attributes: [:id, :score, :student_id])
+    params.require(:test).permit(:id, :lecture_id, :school_quarter_id, :kind, :max_score, :locked, student_tests_attributes: [:id, :score, :student_id])
   end
 
   def ac_tests_count(school_quarter)
