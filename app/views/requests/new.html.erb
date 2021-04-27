@@ -5,6 +5,7 @@
 
     <%= form_with model: @request, url: test_requests_path, method: :post, class: 'form' do |f| %>
       <%= f.hidden_field :teacher_id, value: current_user.profile_id %>
+      <%= f.hidden_field :test_id, value: @test_id %>
       <div class="field">
         <%= f.label :message, 'Mensagem', class: 'label' %>
         <div class="control">
