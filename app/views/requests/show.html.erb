@@ -1,0 +1,32 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Pedido de desbloqueio de notas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Professor</th>
+          <th>Disciplina</th>
+          <th>Turma</th>
+          <th>Tipo</th>
+          <th>Data</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @request.teacher.full_name %></td>
+          <td><%= @request.test.subject.description %></td>
+          <td><%= @request.test.batch.description %></td>
+          <td><%= @request.test.kind %></td>
+          <td><%= @request.created_at.to_s(:db) %></td>
+        <tr>
+      </tbody>
+    </table>
+    <div class="content">
+      <h2>Mensagem</h2>
+      <p><%= @request.message %></p>
+    </div>
+    <%= link_to 'Desbloquear', test_path(@request.test, test: {id: @request.test.id, locked: false }), method: :patch, class: 'button is-primary' %>
+    
+
+  </div>
+</section>

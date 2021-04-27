@@ -1,2 +1,27 @@
-<h1>Requests#index</h1>
-<p>Find me in app/views/requests/index.html.erb</p>
+<section class="section">
+  <div class="container">
+    <h2 class="title">Pedidos de desbloqueio de notas</h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Professor</th>
+          <th>Disciplina</th>
+          <th>Turma</th>
+          <th>Data</th>
+          <th></th>
+        <tr>
+      </thead>
+      <tbody>
+        <% @requests.each do |request| %>
+          <tr>
+            <td><%= request.teacher.full_name %></td>
+            <td><%= request.test.subject.description %></td>
+            <td><%= request.test.batch.description %></td>
+            <td><%= request.created_at.to_s(:db) %></td>
+            <td><%= link_to 'Abrir', request_path(request) %></td>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
