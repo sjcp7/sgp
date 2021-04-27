@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   resources :lectures do
     resources :tests, shallow: true do
       resources :student_tests, only: %i[ index update ], shallow: true
-      resources :requests, only: %i[index show new create], shallow: true
     end
   end
+  resources :requests, only: %i[index show new create]
 
   resources :teachers, :students, :courses, :subjects, :admins
   scope '/settings' do 
