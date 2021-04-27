@@ -10,6 +10,7 @@
       <%= link_to 'Anos Lectivos', school_years_path, class: 'navbar-item' %>
       <%= link_to 'Trimestres', school_quarters_path, class: 'navbar-item' %>
       <%= link_to 'Administradores', admins_path, class: 'navbar-item' %>
+      <%= link_to 'Pedidos de desbloqueio de nota', requests_path, class: 'navbar-item' %>
     </div>
   </div>
 <% elsif current_user.teacher? %>
