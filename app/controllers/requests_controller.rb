@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+    @test_id = params[:test_id]
   end
 
   def create
@@ -11,7 +12,7 @@ class RequestsController < ApplicationController
     if @request.save
       batch = @request.test.batch
       flash[:notice] = 'Pedido enviado com sucesso.'
-      redirect_back fallback_location: proc { batch_lectures_path(batch) }
+      redirect_to batch_lectures_path(batch)
     else
       flash[:notice] = 'Não foi possível enviar pedido.'
       render :new
