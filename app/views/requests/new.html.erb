@@ -3,7 +3,7 @@
     <h1 class="title">Desbloquear Nota</h1>
     <h2 class="subtitle">Este é um pedido para o desbloqueio da nota.</h2>
 
-    <%= form_with model: @request, url: test_requests_path, method: :post, class: 'form' do |f| %>
+    <%= form_with model: @request, url: requests_path, method: :post, class: 'form' do |f| %>
       <%= f.hidden_field :teacher_id, value: current_user.profile_id %>
       <%= f.hidden_field :test_id, value: @test_id %>
       <div class="field">

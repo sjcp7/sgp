@@ -1,27 +1,27 @@
 <div class="buttons are-small">
   <% tests.AC.each_with_index do |ac, num| %>
     <% if ac.locked? && current_user.teacher? %>
-      <%= link_to "AC#{num + 1}", new_test_request_path(ac), class: 'button', disabled: true %>
+      <%= link_to "AC#{num + 1}", new_request_path(test_id: ac.id), class: 'button', disabled: true %>
     <% else %>
       <%= link_to "AC#{num + 1}", edit_test_path(ac), class: 'button' %>
     <% end %>
   <% end %>
 
   <% if tests.PP.first.locked? && current_user.teacher? %>
-    <%= link_to 'PP', new_test_request_path(tests.PP.first), class: 'button is-primary', disabled: true %>
+    <%= link_to 'PP', new_request_path(test_id: tests.PP.first), class: 'button is-primary', disabled: true %>
   <% else %>
     <%= link_to 'PP', edit_test_path(tests.PP.first), class: 'button is-primary' %>
   <% end %>
 
   <% if tests.PT.first.locked? && current_user.teacher? %>
-    <%= link_to 'PT', new_test_request_path(tests.PT.first), class: 'button is-primary', disabled: true %>
+    <%= link_to 'PT', new_request_path(test_id: tests.PT.first.id), class: 'button is-primary', disabled: true %>
   <% else %>
     <%= link_to 'PT', edit_test_path(tests.PT.first), class: 'button is-primary' %>
   <% end %> 
 
   <% if sq.quarter == 3 %>
     <% if tests.EX.first.locked? && current_user.teacher? %>
-      <%= link_to 'EX', new_test_request_path(tests.EX.first), class: 'button is-primary', disabled: true %>
+      <%= link_to 'EX', new_request_path(test_id: tests.EX.first.id), class: 'button is-primary', disabled: true %>
     <% else %>
       <%= link_to 'EX', edit_test_path(tests.EX.first), class: 'button is-primary' %>
     <% end %>
