@@ -41,13 +41,20 @@ course_subject_list = [
 ]
 course_subjects = CourseSubject.create(course_subject_list)
 
+Teacher.destroy_all
+teacher_list = [
+  { first_name: 'Cedrick', last_name: 'Mansoni' },
+  { first_name: 'Nelson', last_name: 'Cachinda' }
+]
+teachers = Teacher.create(teacher_list)
+
 Batch.destroy_all
 batch_list = [
-  { description: 'INFO10', course: courses.first, school_year: school_years.first, school_grade: school_grades.first },
-  { description: 'INFO10', course: courses.first, school_year: school_years.last, school_grade: school_grades.first },
-  { description: 'INFO11', course: courses.first, school_year: school_years.last, school_grade: school_grades.second },
-  { description: 'CFB10', course: courses.last, school_year: school_years.last, school_grade: school_grades.first },
-  { description: 'CFB11', course: courses.last, school_year: school_years.last, school_grade: school_grades.second },
+  { description: 'INFO10', course: courses.first, school_year: school_years.first, school_grade: school_grades.first, batch_director: teachers.first },
+  { description: 'INFO10', course: courses.first, school_year: school_years.last, school_grade: school_grades.first, batch_director: teachers.first },
+  { description: 'INFO11', course: courses.first, school_year: school_years.last, school_grade: school_grades.second, batch_director: teachers.first },
+  { description: 'CFB10', course: courses.last, school_year: school_years.last, school_grade: school_grades.first, batch_director: teachers.last },
+  { description: 'CFB11', course: courses.last, school_year: school_years.last, school_grade: school_grades.second, batch_director: teachers.last },
 ]
 batches = Batch.create(batch_list)
 
@@ -90,12 +97,6 @@ enrollment_list = [
 ]
 enrollments = Enrollment.create(enrollment_list)
 
-Teacher.destroy_all
-teacher_list = [
-  { first_name: 'Cedrick', last_name: 'Mansoni' },
-  { first_name: 'Nelson', last_name: 'Cachinda' }
-]
-teachers = Teacher.create(teacher_list)
 
 Admin.destroy_all
 admin = Admin.create(first_name: 'admin', last_name: 'admin')

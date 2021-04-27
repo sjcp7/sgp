@@ -2,6 +2,7 @@ class Batch < ApplicationRecord
   belongs_to :course
   belongs_to :school_year
   belongs_to :school_grade
+  belongs_to :batch_director, class_name: "Teacher"
   has_many :course_subjects, through: :course
   has_many :enrollments
   has_many :students, through: :enrollments
