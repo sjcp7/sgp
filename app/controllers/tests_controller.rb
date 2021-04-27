@@ -50,6 +50,6 @@ class TestsController < ApplicationController
   end
 
   def ac_tests_count(school_quarter)
-    @lecture.students.first.tests.AC.find_by_school_quarter(@school_quarter).size
+    @lecture.tests.find_by_school_quarter(@school_quarter).AC.size
   end
 end
