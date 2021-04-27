@@ -53,6 +53,7 @@
           <% end %>
         </tbody>
       </table>
+      <%= f.hidden_field :locked, value: true %>
       <%= f.submit 'Salvar', class: 'button is-primary'%>
     <% end %>
   </div>
