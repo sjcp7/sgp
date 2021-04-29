@@ -9,6 +9,7 @@ class Test < ApplicationRecord
   has_many :student_tests, dependent: :destroy
   has_many :students, through: :student_tests
   has_one :batch, through: :lecture
+  has_one :batch_director, through: :batch
   has_one :subject, through: :lecture
   has_many :requests
 
