@@ -4,7 +4,8 @@ class LecturePolicy < ApplicationPolicy
       if user.admin?
         scope.all
       elsif user.teacher?
-        scope.where(teacher: user.profile)
+        teacher = user.profile
+        scope.where(teacher: teacher).or(scope.where(batch: [teacher.managed_batches]))
       end
     end
   end
