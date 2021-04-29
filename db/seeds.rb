@@ -51,7 +51,7 @@ teachers = Teacher.create(teacher_list)
 Batch.destroy_all
 batch_list = [
   { description: 'INFO10', course: courses.first, school_year: school_years.first, school_grade: school_grades.first, batch_director: teachers.first },
-  { description: 'INFO10', course: courses.first, school_year: school_years.last, school_grade: school_grades.first, batch_director: teachers.first },
+  { description: 'INFO10', course: courses.first, school_year: school_years.last, school_grade: school_grades.first, batch_director: teachers.last },
   { description: 'INFO11', course: courses.first, school_year: school_years.last, school_grade: school_grades.second, batch_director: teachers.first },
   { description: 'CFB10', course: courses.last, school_year: school_years.last, school_grade: school_grades.first, batch_director: teachers.last },
   { description: 'CFB11', course: courses.last, school_year: school_years.last, school_grade: school_grades.second, batch_director: teachers.last },
