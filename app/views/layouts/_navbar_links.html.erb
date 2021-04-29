@@ -15,4 +15,7 @@
   </div>
 <% elsif current_user.teacher? %>
   <%= link_to 'Minhas Turmas', batches_path, class: 'navbar-item' %>
+  <% if current_user.profile.managed_batches.any? %>
+    <%= link_to 'Desbloqueio de nota', requests_path, class: 'navbar-item' %>
+  <% end %>
 <% end %>
