@@ -7,6 +7,7 @@
           <th>Professor</th>
           <th>Disciplina</th>
           <th>Turma</th>
+          <th>Ano Lectivo</th>
           <th>Tipo</th>
           <th>Data</th>
         <tr>
@@ -16,6 +17,7 @@
           <td><%= @request.teacher.full_name %></td>
           <td><%= @request.test.subject.description %></td>
           <td><%= @request.test.batch.description %></td>
+          <td><%= @request.test.batch.school_year.year %></td>
           <td><%= @request.test.kind %></td>
           <td><%= @request.created_at.to_s(:db) %></td>
         <tr>
