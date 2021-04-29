@@ -8,10 +8,12 @@ class Lecture < ApplicationRecord
   has_one :subject, through: :course_subject
   has_one :course, through: :course_subject
   has_many :tests
+  has_one :batch_director, through: :batch
 
   after_create :create_tests
 
   scope :find_by_teacher, ->(teacher) { where(teacher: teacher) }
+  
 
   private
 
