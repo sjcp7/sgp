@@ -14,13 +14,17 @@ class TestPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? or (!record.locked? && (user_owns_test? && allowed_tests?))
+    user.admin? or batch_director? or (!record.locked? && (user_owns_test? && allowed_tests?))
   end
 
   private
 
   def user_owns_test?
     record.teacher == user.profile
+  end
+
+  def batch_director?
+    record.batch.batch_director == user.profile
   end
 
   def allowed_tests?
