@@ -9,6 +9,10 @@ class BatchesController < ApplicationController
     @batch = Batch.new
     authorize @batch
   end
+
+  def show
+    @batch = Batch.find(params[:id])
+  end
   
   def create
     @batch = Batch.new(batch_params)
