@@ -31,6 +31,10 @@ class Test < ApplicationRecord
   scope :score, ->{ student_tests.first.score }
   scope :find_by_lecture, ->(lecture) { where(lecture: lecture) }
 
+  def self.student_approved?(student)
+    final_score = student_final_score(student)
+    final_score >= 9.5 
+  end
 
   private
 
@@ -38,5 +42,11 @@ class Test < ApplicationRecord
     if self.AC?
       self.student_tests.each { |st| st.update_student_tests }
     end
+  end
+
+  def self.student_final_score(student)
+    student_tests = student.tests.CF.map {|t| t.student_tests.find_by_student(student) }
+    final_scores = student_tests.map {|st| st.first.score }
+    average = final_scores.reduce(:+) / final_scores.size
   end
 end
