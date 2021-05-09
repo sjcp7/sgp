@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'pundit', '~> 2.1'
 gem 'bulma-rails', '~> 0.9.1'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
