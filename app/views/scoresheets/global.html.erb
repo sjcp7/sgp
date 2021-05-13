@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">Pauta global</h2>
+    <h3 class="subtitle"><%= @batch.description %></h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <% @lectures.each do |lecture| %>
+            <th colspan="3"><%= lecture.subject.acronymn %></th>
+          <% end %>
+        </tr>
+        <tr>
+          <th>Estudante</th>
+          <% @lectures.size.times do %>
+            <th>MAD</th>
+            <th>EX</th>
+            <th>CF</th>
+          <% end %>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @students_with_tests.each do |student_with_tests| %>
+            <% student = student_with_tests[:student] %>
+            <tr>
+              <td><%= student.full_name %></td>
+              <% @lectures.each do |lecture| %>
+                <% tests = student_with_tests[:tests].find_by_lecture(lecture) %>
+                
+                <td><%= tests.MAD.first.student_tests.find_by_student(student).first.score %></td>
+                <td><%= tests.EX.first.student_tests.find_by_student(student).first.score %></td>
+                <td><%= tests.CF.first.student_tests.find_by_student(student).first.score %></td>
+              <% end %>
+              <td>
+                <% if Test.student_approved?(student) %>
+                  Aprovado
+                <% else %>
+                  Reprovado
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

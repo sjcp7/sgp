@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :school_years, :school_quarters, only: %i[ index show create update new ]
   end
 
+  resource :scoresheets, only: %i[ show ]
+
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

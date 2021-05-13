@@ -14,14 +14,14 @@
       <tbody>
         <% @lectures.each do |lecture| %>
           <% @school_quarters.each do |sq| %>
-            <% tests = lecture.tests.find_by_school_quarter(sq) %>
             <tr>
+              <% tests = lecture.tests.find_by_school_quarter(sq) %>
               <td><%= lecture.subject.description %></td>
               <td><%= sq.quarter %></td>
               <td>
-                <%= link_to 'AC', lecture_tests_path(lecture, kind: 'AC', school_quarter_id: sq.id), 
+                <%= link_to 'AC', scoresheets_path(lecture_id: lecture.id, kind: 'AC', school_quarter_id: sq.id), 
                   class: 'button is-link is-light' %>
-                <%= link_to 'Trimestral', lecture_tests_path(lecture, kind: 'Trimestral', school_quarter_id: sq.id), 
+                <%= link_to 'Trimestral', scoresheets_path(lecture_id: lecture.id, kind: 'Trimestral', school_quarter_id: sq.id), 
                   class: 'button is-link is-light' %>
               </td>
               <td>
