@@ -36,6 +36,10 @@ class Test < ApplicationRecord
     final_score >= 9.5 
   end
 
+  def self.ac_tests_count_by_lecture_and_school_quarter(lecture, sq)
+    lecture.tests.find_by_school_quarter(sq).AC.size
+  end
+
   private
 
   def update_student_tests
