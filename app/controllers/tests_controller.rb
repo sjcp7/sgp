@@ -1,18 +1,4 @@
 class TestsController < ApplicationController
-  def index
-    @lecture = policy_scope(Lecture).find(params[:lecture_id])
-    @school_quarter = SchoolQuarter.find(params[:school_quarter_id])
-    @students_with_tests = @lecture.students.map do |student|
-      { student: student, tests: student.tests.find_by_lecture(@lecture).find_by_school_quarter(@school_quarter) }
-    end
-    @num_of_ac = ac_tests_count(@school_quarter)
-    if params[:kind] == 'AC'
-      render template: 'tests/index_ac'
-    elsif params[:kind] == 'Trimestral'
-      render template: 'tests/index_trimestral'
-    end
-  end
-
   def edit
     @test = Test.find(params[:id])
     authorize @test
@@ -47,9 +33,5 @@ class TestsController < ApplicationController
 
   def test_params
     params.require(:test).permit(:id, :lecture_id, :school_quarter_id, :kind, :max_score, :locked, student_tests_attributes: [:id, :score, :student_id])
-  end
-
-  def ac_tests_count(school_quarter)
-    @lecture.tests.find_by_school_quarter(@school_quarter).AC.size
   end
 end
