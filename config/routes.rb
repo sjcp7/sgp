@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :batches do
     resources :lectures, shallow: true
+    resources :enrollments, only: %i[ index create destroy ], shallow: true
   end
 
   resources :lectures do

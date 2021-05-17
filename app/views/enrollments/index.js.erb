@@ -1,0 +1,6 @@
+document.querySelectorAll('.panel p.panel-block').forEach(el => { 
+    el.remove()
+})
+<% @enrollments.each do |enrollment| %>
+  document.querySelector('.panel').innerHTML += '<%= j render 'batches/student', student: enrollment.student, kind: 'remove', batch_id: enrollment.batch.id %>'
+<% end %>
