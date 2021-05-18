@@ -19,7 +19,7 @@
             <td><%= batch.course.description %></td>
             <td><%= batch.school_year.year %></td>
             <td><%= batch.school_grade.grade %></td>
-            <td><%= link_to 'Abrir', batch_lectures_path(batch) %></td>
+            <td><%= link_to 'Abrir', batch_path(batch) %></td>
           </tr>
         <% end %>
       </tbody>
