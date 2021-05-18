@@ -1,7 +1,11 @@
 <section class="section">
   <div class="container">
-    <h2 class="title"><%= @batch.description %> | <%= link_to 'Notas', batch_lectures_path(@batch) %></h2>
-    <%= link_to 'Pauta Global', scoresheets_global_path(batch_id: @batch.id) %>
+    <h2 class="title">
+      <%= @batch.description %> | 
+      <%= link_to 'Editar', edit_batch_path(@batch) %> | 
+      <%= link_to 'Notas', batch_lectures_path(@batch) %>
+    </h2>
+    <%= link_to 'Pauta Global', scoresheets_path(batch_id: @batch.id) %>
     <h2 class="subtitle">Estudantes</h2>
     <table class="table is-fullwidth">
       <thead>
