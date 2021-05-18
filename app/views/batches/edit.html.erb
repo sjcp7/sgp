@@ -1,0 +1,8 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title"><%= @batch.description %></h2>
+    <%= render 'batches/form', batch: @batch %>
+  </div>
+</section>
+
+<%= javascript_pack_tag 'handle_batch_students_tabs' %>

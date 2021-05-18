@@ -1,23 +1,17 @@
 <%= form_with model: batch, class: 'form' do |f| %>
-  <div class="field">
-    <%= f.label :course_id, 'Curso' %>
-    <div class="control">
-      <div class="select">
-        <%= f.select :course_id, courses %>
-      </div>
+  <nav class="panel">
+    <p class="panel-heading">Estudantes</p>
+    <div class="panel-block">
+      <p class="control">
+        <%= render 'batches/search_form' %>
+      </p>
     </div>
-  </div>
-
-  <div class="field">
-    <%= f.label :school_grade_id, 'Classe' %>
-    <div class="control">
-      <div class="select">
-        <%= f.select :school_grade_id, school_grades %>
-      </div>
-    </div>
-  </div>
-
-  <%= f.hidden_field :school_year_id, value: school_year.id %>
-
-  <%= f.submit 'Ok', class: 'button is-primary' %>
+    <p class="panel-tabs">
+      <%= link_to 'Nesta Turma', batch_enrollments_path(@batch), class: 'is-active', remote: true %>
+      <%= link_to 'Todos', students_path(batch_id: @batch.id), remote: true %>
+    </p>
+    <% batch.enrollments.each do |enrollment| %>
+      <%= render 'batches/student', student: enrollment.student, kind: 'remove', batch_id: batch.id %>
+    <% end %>
+  </nav>
 <% end %>

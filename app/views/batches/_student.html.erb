@@ -1,0 +1,12 @@
+<p class="panel-block">
+  <%= student.full_name %>
+  <% if kind == 'add' %>
+    <%= link_to 'Adicionar', 
+      batch_enrollments_path(batch_id: batch_id, enrollment: { batch_id: batch_id, student_id: student.id }), 
+      method: :post, remote: true %>
+  <% else %>
+    <%= link_to 'Remover',
+      enrollment_path(Enrollment.where(batch_id: batch_id, student_id: student.id).first), 
+      method: :delete, data: { confirm: 'Tem a certeza?' }, remote: true %>
+  <% end %>
+</p>

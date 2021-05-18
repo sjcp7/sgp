@@ -14,6 +14,10 @@ class BatchesController < ApplicationController
     @batch = Batch.find(params[:id])
   end
   
+  def edit
+    @batch = Batch.includes(:students, :enrollments).find(params[:id])
+  end
+  
   def create
     @batch = Batch.new(batch_params)
     if @batch.save
