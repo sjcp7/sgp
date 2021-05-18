@@ -14,4 +14,8 @@
  *= require_self
  */
 
- @import "bulma";
+  @import "bulma";
+
+  html, body, .table, .navbar {
+    background-color: #f8f8f8;
+  }
