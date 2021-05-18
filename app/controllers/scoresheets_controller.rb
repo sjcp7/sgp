@@ -9,7 +9,10 @@ class ScoresheetsController < ApplicationController
       render 'trimestral'
     else
       set_vars_for_global
-      render 'global'
+      respond_to do |format|
+        format.html { render 'global' }
+        format.xls { render 'global' }
+      end
     end
   end
 
@@ -30,6 +33,7 @@ class ScoresheetsController < ApplicationController
 
   def set_vars_for_global
     @batch = Batch.includes(:tests, :students, :lectures).find(params[:batch_id])
+    authorize @batch, :show?, policy_class: ScoresheetsPolicy
     @lectures = @batch.lectures
     @students_with_tests = @batch.students.map do |student|
       { student: student, tests: student.tests }

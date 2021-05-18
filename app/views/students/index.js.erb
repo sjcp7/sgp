@@ -1,0 +1,17 @@
+document.querySelectorAll('.panel p.panel-block').forEach(el => { 
+    el.remove()
+})
+<% @students.each do |student| %>
+  <% if Enrollment.exists?(batch_id: params[:batch_id], student_id: student.id) %>
+    document.querySelector('.panel').innerHTML += '<%= j render 'batches/student', student: student, kind: 'remove', batch_id: params[:batch_id] %>'
+  <% else %>
+    document.querySelector('.panel').innerHTML += '<%= j render 'batches/student', student: student, kind: 'add', batch_id: params[:batch_id] %>'
+  <% end %>
+<% end %>
+
+
+
+
+
+
+
