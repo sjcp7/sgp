@@ -14,11 +14,8 @@ class Lecture < ApplicationRecord
 
   scope :find_by_teacher, ->(teacher) { where(teacher: teacher) }
   
-
-  private
-
-  def create_tests
-    students = self.students
+  def create_tests(student = nil)
+    students = student || self.students
     s_quarters = SchoolQuarter.all
     third_quarter = ['MAD', 'EX', 'CF']
     locked_kinds = ['PP', 'PT']
@@ -27,6 +24,8 @@ class Lecture < ApplicationRecord
     create_locked_tests(students: students, kinds: locked_kinds, quarters: s_quarters)
     create_locked_tests(students: students, kinds: third_quarter, quarter: s_quarters.third)
   end
+
+  private
 
   def create_regular_tests(options)
     options[:students].each do |student|
