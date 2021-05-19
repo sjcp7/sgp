@@ -25,6 +25,7 @@ class CoursesController < ApplicationController
     if @course.save
       redirect_to root_path, notice: 'Curso criado com sucesso.'
     else
+      @subjects = Subject.all
       flash.now[:alert] = 'Não foi possível criar curso.'
       render :new
     end

@@ -1,6 +1,9 @@
 <section class="section">
   <div class="container">
     <h1 class="title"><%= @batch.description %></h1>
+    <% if current_user.admin? %>
+      <%= link_to 'Editar disciplinas', '#' %>
+    <% end %>
     <table class="table is-fullwidth">
       <thead>
         <tr>

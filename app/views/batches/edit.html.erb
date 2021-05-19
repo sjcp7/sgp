@@ -1,7 +1,7 @@
 <section class="section">
   <div class="container">
     <h2 class="title"><%= @batch.description %></h2>
-    <%= render 'batches/form', batch: @batch %>
+    <%= render 'batches/form', batch: @batch, batch_director: @batch_director, teachers: @teachers %>
   </div>
 </section>
 

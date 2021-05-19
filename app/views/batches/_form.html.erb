@@ -1,11 +1,5 @@
-<%= form_with model: batch, class: 'form' do |f| %>
-  <nav class="panel">
+<nav class="panel">
     <p class="panel-heading">Estudantes</p>
-    <div class="panel-block">
-      <p class="control">
-        <%= render 'batches/search_form' %>
-      </p>
-    </div>
     <p class="panel-tabs">
       <%= link_to 'Nesta Turma', batch_enrollments_path(@batch), class: 'is-active', remote: true %>
       <%= link_to 'Todos', students_path(batch_id: @batch.id), remote: true %>
@@ -13,5 +7,37 @@
     <% batch.enrollments.each do |enrollment| %>
       <%= render 'batches/student', student: enrollment.student, kind: 'remove', batch_id: batch.id %>
     <% end %>
-  </nav>
+</nav>
+
+<%= form_with model: batch, class: 'form' do |f| %>
+  <div class="field">
+    <%= f.label :batch_director_id, 'Director de turma', class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <% if batch_director.nil? %>
+          <%= f.select :batch_director_id, teachers, { prompt: '-------------' }, required: true %>
+        <% else %>
+          <%= f.select :batch_director_id, teachers, { selected: batch_director.id }, required: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.fields_for :lectures do |lectures_f| %>
+    <% lecture = lectures_f.object %>
+    <div class="field">
+      <%= lectures_f.label :teacher_id, "Professor(a) de #{lecture.subject.acronymn}" %>
+      <div class="control">
+        <div class="select">
+          <% if lecture.teacher.nil? %>
+            <%= lectures_f.select :teacher_id, teachers, { prompt: '-------------' }, required: true %>
+          <% else %>
+            <%= lectures_f.select :teacher_id, teachers, { selected: lecture.teacher.id }, required: true %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= f.submit 'Ok', class: 'button is-primary' %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_211932) do
+ActiveRecord::Schema.define(version: 2021_05_18_210735) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_211932) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
-    t.integer "batch_director_id", null: false
+    t.integer "batch_director_id"
     t.index ["batch_director_id"], name: "index_batches_on_batch_director_id"
     t.index ["course_id"], name: "index_batches_on_course_id"
     t.index ["school_grade_id"], name: "index_batches_on_school_grade_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_211932) do
   create_table "lectures", force: :cascade do |t|
     t.integer "course_subject_id", null: false
     t.integer "batch_id", null: false
-    t.integer "teacher_id", null: false
+    t.integer "teacher_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batch_id"], name: "index_lectures_on_batch_id"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_211932) do
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nif"
   end
 
   create_table "subjects", force: :cascade do |t|
