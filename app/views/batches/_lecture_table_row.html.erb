@@ -1,0 +1,14 @@
+<tr>
+  <td><%= lecture.subject.description %></td>
+  <td>
+    <div class="control">
+      <div class="select">
+        <% if lecture.teacher.nil? %>
+          <%= f.select :teacher_id, teachers, { prompt: '-------------' }, required: true %>
+        <% else %>
+          <%= f.select :teacher_id, teachers, { selected: lecture.teacher.id }, required: true %>
+        <% end %>
+      </div>
+    </div>
+  </td>
+</tr>

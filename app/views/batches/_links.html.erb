@@ -1,0 +1,6 @@
+<% font_size = 'is-size-6' %>
+<%= link_to 'Notas', batch_lectures_path(@batch), class: font_size %> |
+<% if current_user.admin? or current_user.profile == @batch.batch_director %>
+  <%= link_to 'Editar', edit_batch_path(@batch), class: font_size %> |
+  <%= link_to 'Pauta Global', scoresheets_path(batch_id: @batch.id), class: font_size %>
+<% end %>

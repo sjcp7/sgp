@@ -23,21 +23,21 @@
     </div>
   </div>
 
-  <%= f.fields_for :lectures do |lectures_f| %>
-    <% lecture = lectures_f.object %>
-    <div class="field">
-      <%= lectures_f.label :teacher_id, "Professor(a) de #{lecture.subject.acronymn}" %>
-      <div class="control">
-        <div class="select">
-          <% if lecture.teacher.nil? %>
-            <%= lectures_f.select :teacher_id, teachers, { prompt: '-------------' }, required: true %>
-          <% else %>
-            <%= lectures_f.select :teacher_id, teachers, { selected: lecture.teacher.id }, required: true %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Disciplina</th>
+        <th>Professor</th>
+      </tr>
+    </thead>
+    <tbody>  
+      <%= f.fields_for :lectures do |lectures_f| %>
+        <% lecture = lectures_f.object %>
+        <%= render 'batches/lecture_table_row', lecture: lecture, f: lectures_f, teachers: teachers %>
+      <% end %>
+    </tbody>
+  </table>
   
   <%= f.submit 'Ok', class: 'button is-primary' %>
+  <%= link_to 'Voltar', batch_path(@batch), class: 'button' %>
 <% end %>

@@ -3,7 +3,7 @@
     <h2 class="title">Pauta global</h2>
     <h3 class="subtitle"><%= @batch.description %> | 
       <%= 
-        link_to 'Excel', scoresheets_path(format: :xls, batch_id: @batch.id) if current_user.admin? || @batch.batch_director == current_user.profile
+        link_to 'Exportar para Excel', scoresheets_path(format: :xls, batch_id: @batch.id) if current_user.admin? || @batch.batch_director == current_user.profile
       %>
     </h3>
     
